@@ -1,8 +1,5 @@
 'use strict'; 
 
-//description of options in readme 
-//publish 
-
 overrideDefaultHandlingPerCall();
 
 function functionThatErrors() {
