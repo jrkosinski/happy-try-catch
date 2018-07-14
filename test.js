@@ -1,6 +1,7 @@
 'use strict'; 
 
 //ensure async case 
+//provide case-by-case complete override
 //write readme
 
 allOptions();
@@ -23,9 +24,9 @@ function withFinally() {
 
     //simple try/catch, add finally 
     return exception.try(() => {
-        functionThatErrors();
+        return functionThatErrors();
     },  { 
-        finally: () => {
+        finally: (e, opts) => {
             console.log("error has been duly handled, m'liege"); 
         }
     });
@@ -43,7 +44,7 @@ function allOptions() {
 
     //simple try/catch, using all pre-configured options 
     exception.try(() => {
-        functionThatErrors();
+        return functionThatErrors();
     });
 }
 
@@ -52,20 +53,20 @@ function overrideOptions() {
     const exception = require('./index').create({ 
         logPrefix: 'TEST',      // log prefix
         rethrow: true,          // re-throw all caught exceptions after handling
-        finally: (e) => {},     // provide a default finally 
-        onError: (e) => {},     // add additional, custom error handling (e.g. custom logging) 
+        finally: (e, opts) => {},     // provide a default finally 
+        onError: (e, opts) => {},     // add additional, custom error handling (e.g. custom logging) 
         defaultReturnValue: ''  // value returned if error is caught/handled (default is undefined)
     });
 
     //override some or all default options on a per-call basis
     exception.try(() => {
-        functionThatErrors();
+        return functionThatErrors();
     }, {
         logPrefix: 'TEST A',        // change log prefix just for this one call
         finally: null,              // do not execute a finally for this call
         defaultReturnValue: null,   // change default return value for this call
-        onError: (e) => {            // additional error handling for this call
-            console.log('some custom logging...');
+        onError: (e, opts) => {            // additional error handling for this call
+            console.log(opts.logPrefix() + ' - some custom logging...');
         }
     });
 }
@@ -80,7 +81,7 @@ function overrideDefaultHandling() {
     }; 
 
     exception.try(() => {
-        functionThatErrors();
+        return functionThatErrors();
     });
 }
 
