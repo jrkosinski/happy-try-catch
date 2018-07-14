@@ -1,7 +1,5 @@
 'use strict'; 
 
-//better overriding of default handler 
-//break into class files
 //test all cases 
 //write readme
 
@@ -11,7 +9,7 @@ function simpleCase() {
     const exception = require('./index').create({ logPrefix: 'TEST'});
 
     function functionThatErrors() {
-        const x = 0; return 1/x; 
+        throw new Error('an error happened');
     }
 
     //simple try/catch, using all default or pre-configured options 

@@ -42,11 +42,11 @@ function Handler(options) {
             return f();
         }
         catch(e) {
-            error = err;
+            error = e;
 
             //basic error handling first 
             if (_this.handleError)
-                _this.handleError(err, options); 
+                _this.handleError(e, combinedOpts); 
 
             //get options as defined or overridden
             const onError = combinedOpts.onError(); 
@@ -55,12 +55,12 @@ function Handler(options) {
 
             //additional error handling
             if (onError && helpers.isFunction(onError)) {
-                return onError(err); 
+                return onError(e); 
             }
 
             //rethrow option 
             if (rethrow) {
-                throw err; 
+                throw e; 
             }
 
             //return default value by default
@@ -85,22 +85,22 @@ function Handler(options) {
      */
     this.handleError = (e, options) => {
         try {
-            if (handlErrorOverride) {
-                handlErrorOverride(e, options); 
+            if (_this.handlErrorOverride) {
+                _this.handlErrorOverride(e, options); 
             }
             else {
                 const logPrefix = options.logPrefix(); 
                 if (logPrefix) {
                     console.error(logPrefix + ': '); 
-                    console.error(err);
+                    console.error(e);
                 } else {
-                    console.error(err); 
+                    console.error(e); 
                 }
             }
         }
-        catch(e) {
+        catch(ex) {
             console.error('handleError threw exception! '); 
-            console.error(err);
+            console.error(ex);
         }
     }; 
 
