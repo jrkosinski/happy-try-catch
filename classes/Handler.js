@@ -85,8 +85,8 @@ function Handler(options) {
      */
     this.handleError = (e, options) => {
         try {
-            if (_this.handlErrorOverride) {
-                _this.handlErrorOverride(e, options); 
+            if (_this.handleErrorOverride) {
+                _this.handleErrorOverride(e, options); 
             }
             else {
                 const logPrefix = options.logPrefix(); 
@@ -112,7 +112,7 @@ function Handler(options) {
      * @param {Options} options
      *  encapsulates exception-handling options 
      */
-    this.handlErrorOverride = null;
+    this.handleErrorOverride = null;
 }
 
 module.exports = Handler;

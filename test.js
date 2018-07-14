@@ -3,18 +3,31 @@
 //test all cases 
 //write readme
 
-overrideOptions();
+withFinally();
+
+function functionThatErrors() {
+    const nullObj = null; return nullObj.f();
+}
 
 function simpleCase() {
     const exception = require('./index').create({ logPrefix: 'TEST'});
 
-    function functionThatErrors() {
-        const nullObj = null; return nullObj.f();
-    }
-
     //simple try/catch, using all default or pre-configured options 
     return exception.try(() => {
         functionThatErrors();
+    });
+}
+
+function withFinally() {
+    const exception = require('./index').create({ logPrefix: 'TEST'});
+
+    //simple try/catch, add finally 
+    return exception.try(() => {
+        functionThatErrors();
+    },  { 
+        finally: () => {
+            console.log("error has been duly handled, m'liege"); 
+        }
     });
 }
 
@@ -27,10 +40,6 @@ function allOptions() {
         onError: () => {},      // add additional, custom error handling (e.g. custom logging) 
         defaultReturnValue: ''  // value returned if error is caught/handled (default is undefined)
     });
-
-    function functionThatErrors() {
-        const nullObj = null; return nullObj.f();
-    }
 
     //simple try/catch, using all pre-configured options 
     exception.try(() => {
@@ -47,10 +56,6 @@ function overrideOptions() {
         onError: (e) => {},     // add additional, custom error handling (e.g. custom logging) 
         defaultReturnValue: ''  // value returned if error is caught/handled (default is undefined)
     });
-
-    function functionThatErrors() {
-        const nullObj = null; return nullObj.f();
-    }
 
     //override some or all default options on a per-call basis
     exception.try(() => {
@@ -70,26 +75,13 @@ function overrideDefaultHandling() {
     const exception = require('./index').create({ logPrefix: 'TEST'});
 
     //globally override the default handler 
-    exception.handleError = (e, options) => {
-        console.log(options.logPrefix)
+    exception.handleErrorOverride = (e, options) => {
+        console.log(options.logPrefix() + ' - eep eep'); 
     }; 
-
-    function functionThatErrors() {
-        const x = 0; return 1/x; 
-    }
 
     exception.try(() => {
         functionThatErrors();
     });
-}
-
-function addFinally() {
-    const exception = require('./index').create({ logPrefix: 'TEST'});
-
-    function functionThatErrors() {
-        const x = 0; return 1/x; 
-    }
-
 }
 
 function withAsync() {
@@ -111,10 +103,6 @@ function withAsync() {
 function withPromises() {
 
     const exception = require('./index').create({ logPrefix: 'TEST'});
-
-    function functionThatErrors() {
-        const x = 0; return 1/x; 
-    }
 
     //inside of promise 
     return new Promise((resolve, reject) => {
