@@ -55,7 +55,7 @@ function Handler(options) {
 
             //additional error handling
             if (onError && helpers.isFunction(onError)) {
-                returnValue = onError(e); 
+                returnValue = onError(e, combinedOpts); 
             }
 
             //rethrow option 
@@ -70,7 +70,7 @@ function Handler(options) {
             //finally if configured 
             const fin = combinedOpts.finally(); 
             if (fin && helpers.isFunction(fin)) {
-                fin(error); 
+                fin(error, combinedOpts); 
             }
         }
     };

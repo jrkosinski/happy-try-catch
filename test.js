@@ -1,9 +1,9 @@
 'use strict'; 
 
-//test all cases 
+//ensure async case 
 //write readme
 
-withFinally();
+allOptions();
 
 function functionThatErrors() {
     const nullObj = null; return nullObj.f();
@@ -34,11 +34,11 @@ function withFinally() {
 function allOptions() {
     //provide default options on construction
     const exception = require('./index').create({ 
-        logPrefix: 'TEST',      // log prefix
-        rethrow: true,          // re-throw all caught exceptions after handling
-        finally: () => {},      // provide a default finally 
-        onError: () => {},      // add additional, custom error handling (e.g. custom logging) 
-        defaultReturnValue: ''  // value returned if error is caught/handled (default is undefined)
+        logPrefix: 'TEST',          // log prefix
+        rethrow: true,              // re-throw all caught exceptions after handling
+        finally: (e, opts) => {},   // provide a default finally 
+        onError: (e, opts) => {},   // add additional, custom error handling (e.g. custom logging) 
+        defaultReturnValue: ''      // value returned if error is caught/handled (default is undefined)
     });
 
     //simple try/catch, using all pre-configured options 
