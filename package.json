@@ -1,25 +1,26 @@
 {
-  "name": "simple-try-catch",
+  "name": "trycatch-wrapper",
   "version": "1.0.0",
-  "description": "try-catch wrapper with quick easy syntax; fully customizable & works with async",
+  "description": "try-catch wrapper with quick easy syntax; fully customizable & works with async and promises",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jrkosinski/simple-try-catch.git"
+    "url": "git+https://github.com/jrkosinski/trycatch-wrapper.git"
   },
   "keywords": [
     "try",
     "catch",
-    "exception",
-    "handler"
+    "exception handling",
+    "exception handler",
+    "try-catch"
   ],
   "author": "John R. Kosinski",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jrkosinski/simple-try-catch/issues"
+    "url": "https://github.com/jrkosinski/trycatch-wrapper/issues"
   },
-  "homepage": "https://github.com/jrkosinski/simple-try-catch#readme"
+  "homepage": "https://github.com/jrkosinski/trycatch-wrapper#readme"
 }

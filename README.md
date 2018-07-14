@@ -1,5 +1,5 @@
-try-wrapper
-===========
+trycatch-wrapper
+================
 
 Use Case
 --------
@@ -65,7 +65,7 @@ Examples
 
 ### Simplest Use Case
 ```javascript
-    const exception = require('try-wrapper').create({ logPrefix: 'TEST'});
+    const exception = require('trycatch-wrapper').create({ logPrefix: 'TEST'});
 
     //simple try/catch, using all default or pre-configured options 
     return exception.try(() => {
@@ -77,7 +77,7 @@ Examples
 
 ### Add a Finally
 ```javascript
-    const exception = require('./index').create({ logPrefix: 'TEST'});
+    const exception = require('trycatch-wrapper').create({ logPrefix: 'TEST'});
 
     //simple try/catch, add finally 
     return exception.try(() => {
@@ -92,7 +92,7 @@ Examples
 ### Customize Options Globally
 ```javascript
     //provide default options on construction
-    const exception = require('./index').create({ 
+    const exception = require('trycatch-wrapper').create({ 
         logPrefix: 'TEST',          // log prefix
         rethrow: true,              // re-throw all caught exceptions after handling
         finally: (e, opts) => {},   // provide a default finally 
@@ -109,7 +109,7 @@ Examples
 ### Override Options per Call
 ```javascript
     //provide default options on construction
-    const exception = require('./index').create({ 
+    const exception = require('trycatch-wrapper').create({ 
         logPrefix: 'TEST',      // log prefix
         rethrow: true,          // re-throw all caught exceptions after handling
         finally: (e, opts) => {},     // provide a default finally 
@@ -133,7 +133,7 @@ Examples
 ### Override Default Handling Globally
 ```javascript
     //globally override the default handler 
-    const exception = require('./index').create({ 
+    const exception = require('trycatch-wrapper').create({ 
         logPrefix: 'TEST',
         handleError: (e, options) => {
             console.log(options.logPrefix() + ' - eep eep'); 
@@ -147,7 +147,7 @@ Examples
 
 ### Override Default Handling per Call
 ```javascript
-    const exception = require('./index').create({ logPrefix: 'TEST'});
+    const exception = require('trycatch-wrapper').create({ logPrefix: 'TEST'});
 
     exception.try(() => {
         return functionThatErrors();
@@ -160,7 +160,7 @@ Examples
 
 ### Use with Promise
 ```javascript
-    const exception = require('./index').create({ logPrefix: 'TEST'});
+    const exception = require('trycatch-wrapper').create({ logPrefix: 'TEST'});
 
     //inside of promise 
     return new Promise((resolve, reject) => {
@@ -181,7 +181,7 @@ Examples
 ### Use with Async/Await
 ```javascript
     //usage with asyncawait library 
-    const exception = require('./index').create({ logPrefix: 'TEST'});
+    const exception = require('trycatch-wrapper').create({ logPrefix: 'TEST'});
     const async = require('asyncawait/async');
     const await = require('asyncawait/await');
 
