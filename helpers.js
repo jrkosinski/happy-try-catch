@@ -17,7 +17,7 @@
  *  value to check 
  */
 /*bool*/ function isDefined(v) {
-    return typeof v === 'undefined'; 
+    return typeof v !== 'undefined'; 
 }
 
 

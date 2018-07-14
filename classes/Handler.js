@@ -51,11 +51,11 @@ function Handler(options) {
             //get options as defined or overridden
             const onError = combinedOpts.onError(); 
             const rethrow = combinedOpts.rethrow(); 
-            const defaultReturnValue = combinedOpts.defaultReturnValue(); 
+            let returnValue = combinedOpts.defaultReturnValue(); 
 
             //additional error handling
             if (onError && helpers.isFunction(onError)) {
-                return onError(e); 
+                returnValue = onError(e); 
             }
 
             //rethrow option 
@@ -64,7 +64,7 @@ function Handler(options) {
             }
 
             //return default value by default
-            return defaultReturnValue; 
+            return returnValue; 
         }
         finally {
             //finally if configured 
@@ -91,8 +91,8 @@ function Handler(options) {
             else {
                 const logPrefix = options.logPrefix(); 
                 if (logPrefix) {
-                    console.error(logPrefix + ': '); 
-                    console.error(e);
+                    console.error(logPrefix + ': ' + e);
+                    console.error(e); 
                 } else {
                     console.error(e); 
                 }

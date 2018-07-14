@@ -3,21 +3,20 @@
 //test all cases 
 //write readme
 
-simpleCase();
+overrideOptions();
 
 function simpleCase() {
     const exception = require('./index').create({ logPrefix: 'TEST'});
 
     function functionThatErrors() {
-        throw new Error('an error happened');
+        const nullObj = null; return nullObj.f();
     }
 
     //simple try/catch, using all default or pre-configured options 
-    exception.try(() => {
+    return exception.try(() => {
         functionThatErrors();
     });
 }
-
 
 function allOptions() {
     //provide default options on construction
@@ -30,7 +29,7 @@ function allOptions() {
     });
 
     function functionThatErrors() {
-        const x = 0; return 1/x; 
+        const nullObj = null; return nullObj.f();
     }
 
     //simple try/catch, using all pre-configured options 
@@ -50,7 +49,7 @@ function overrideOptions() {
     });
 
     function functionThatErrors() {
-        const x = 0; return 1/x; 
+        const nullObj = null; return nullObj.f();
     }
 
     //override some or all default options on a per-call basis
