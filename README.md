@@ -39,17 +39,17 @@ Configuration Options
 ---------------------
 Each option can be specified globally (on creation of the instance), or on a per-call basis. 
 
-- logPrefix (string)
+#### logPrefix (string)
     just any useful identifying string; default error handling writes it to the console 
-- onError (function(err, options))
+#### onError (function(err, options))
     provides additional error handling, after the default error handling has run
-- finally (function(err, options))
+#### finally (function(err, options))
     provides a finally clause
-- handleError (function(err, options))
+#### handleError (function(err, options))
     completely replaces the default error handling 
-- rethrow (bool)
+#### rethrow (bool)
     if true, re-throw errors after handling them (default is false)
-- defaultReturnValue (*)
+#### defaultReturnValue (*)
     value returned by default, if function encounters error 
 
 Note the difference between onError and handleError: the former adds addition error handling after the default error handler has run; the latter replaces the default error handling. 
