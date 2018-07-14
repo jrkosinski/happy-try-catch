@@ -1,5 +1,5 @@
 {
-  "name": "trycatch-wrapper",
+  "name": "happy-try-catch",
   "version": "1.0.0",
   "description": "try-catch wrapper with quick easy syntax; fully customizable & works with async and promises",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jrkosinski/trycatch-wrapper.git"
+    "url": "git+https://github.com/jrkosinski/happy-try-catch.git"
   },
   "keywords": [
     "try",
@@ -20,7 +20,7 @@
   "author": "John R. Kosinski",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jrkosinski/trycatch-wrapper/issues"
+    "url": "https://github.com/jrkosinski/happy-try-catch/issues"
   },
-  "homepage": "https://github.com/jrkosinski/trycatch-wrapper#readme"
+  "homepage": "https://github.com/jrkosinski/happy-try-catch#readme"
 }
