@@ -21,6 +21,7 @@ function Options(defaults, overrides) {
     this.onError = () => { return getOption('onError'); };
     this.finally = () => { return getOption('finally'); };
     this.rethrow = () => { return getOption('rethrow'); }; 
+    this.handleError = () => { return getOption('handleError'); }
     this.defaultReturnValue = () => { return getOption('defaultReturnValue'); };
 
     /**

@@ -93,8 +93,9 @@ function Handler(options) {
      */
     this.handleError = (e, options) => {
         try {
-            if (options.handleError()) {
-                options.handleError()(e, options); 
+            const handleOverride = options.handleError();
+            if (handleOverride && helpers.isFunction(handleOverride)) {
+                handleOverride(e, options); 
             }
             else {
                 const logPrefix = options.logPrefix(); 

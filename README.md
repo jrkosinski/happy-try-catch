@@ -27,13 +27,32 @@ The following code provides you with an object that will provide out-of-the-box 
 ```
 
 Customization
---------------
+-------------
 You can customize each of the following, either globally or on a case-by-case basis: 
 - provide additional error handling to the default 
 - completely override the default error handling
 - add a finally clause 
 - specify whether or not to rethrow errors after handling them (default is false) 
 - provide a default return value (gets returned if function errors)
+
+Configuration Options
+---------------------
+Each option can be specified globally (on creation of the instance), or on a per-call basis. 
+
+- logPrefix (string)
+    just any useful identifying string; default error handling writes it to the console 
+- onError (function(err, options))
+    provides additional error handling, after the default error handling has run
+- finally (function(err, options))
+    provides a finally clause
+- handleError (function(err, options))
+    completely replaces the default error handling 
+- rethrow (bool)
+    if true, re-throw errors after handling them (default is false)
+- defaultReturnValue (*)
+    value returned by default, if function encounters error 
+
+Note the difference between onError and handleError: the former adds addition error handling after the default error handler has run; the latter replaces the default error handling. 
 
 Additional Info
 ---------------

@@ -1,9 +1,9 @@
 'use strict'; 
 
-//provide case-by-case complete override
-//write readme
+//description of options in readme 
+//publish 
 
-allOptions();
+overrideDefaultHandlingPerCall();
 
 function functionThatErrors() {
     const nullObj = null; return nullObj.f();
@@ -72,15 +72,28 @@ function overrideOptions() {
 
 function overrideDefaultHandling() {
 
-    const exception = require('./index').create({ logPrefix: 'TEST'});
-
     //globally override the default handler 
-    exception.handleError = (e, options) => {
-        console.log(options.logPrefix() + ' - eep eep'); 
-    }; 
+    const exception = require('./index').create({ 
+        logPrefix: 'TEST',
+        handleError: (e, options) => {
+            console.log(options.logPrefix() + ' - eep eep'); 
+        }
+    });
 
     exception.try(() => {
         return functionThatErrors();
+    });
+}
+
+function overrideDefaultHandlingPerCall() {
+    const exception = require('./index').create({ logPrefix: 'TEST'});
+
+    exception.try(() => {
+        return functionThatErrors();
+    }, {
+        handleError: (e, options) => {
+            console.log(options.logPrefix() + ' - eep eep'); 
+        }
     });
 }
 
