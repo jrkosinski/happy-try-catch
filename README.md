@@ -111,14 +111,53 @@ Examples
     });
 ```
 
-### Override Default Handling
+### Override Default Handling Globally
 ```javascript
+    const exception = require('./index').create({ logPrefix: 'TEST'});
+
+    //globally override the default handler 
+    exception.handleErrorOverride = (e, options) => {
+        console.log(options.logPrefix() + ' - eep eep'); 
+    }; 
+
+    exception.try(() => {
+        return functionThatErrors();
+    });
 ```
 
 ### Use with Promise
 ```javascript
+    const exception = require('./index').create({ logPrefix: 'TEST'});
+
+    //inside of promise 
+    return new Promise((resolve, reject) => {
+
+        //usage as normal 
+        exception.try(() => {   
+            functionThatErrors();
+        }, {
+            //on error, be sure to reject promise (else it will hang forever) 
+            onError: (e) => {
+                console.log('rejecting promise'); 
+                reject(e); 
+            }
+        });
+    }); 
 ```
 
 ### Use with Async/Await
 ```javascript
+    //usage with asyncawait library 
+    const exception = require('./index').create({ logPrefix: 'TEST'});
+    const async = require('asyncawait/async');
+    const await = require('asyncawait/await');
+
+    //async function 
+    const asyncFunctionThatErrors = async(() => {
+        const x = 0; return 1/x; 
+    }); 
+
+    return exception.try(() => {
+        return await(asyncFunctionThatErrors()); 
+    });
 ```
