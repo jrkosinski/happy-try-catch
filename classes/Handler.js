@@ -11,11 +11,19 @@ const Options = require('./Options');
  * 11 May 2016
  * 
  * Options: 
+ * 
  *  logPrefix {string}
- *  onError {function}
- *  finally {function}
+ *      just any useful identifying string; default error handling writes it to the console 
+ *  onError {function(err, options)}
+ *      provides additional error handling, after the default error handling has run
+ *  finally {function(err, options)}
+ *      provides a finally clause
+ *  handleError {function(err, options)}
+ *      completely replaces the default error handling 
  *  rethrow {bool}
+ *      if true, re-throw errors after handling them (default is false)
  *  defaultReturnValue {*}
+ *      value returned by default, if function encounters error 
  */
 function Handler(options) {
     const _this = this; 
@@ -85,8 +93,8 @@ function Handler(options) {
      */
     this.handleError = (e, options) => {
         try {
-            if (_this.handleErrorOverride) {
-                _this.handleErrorOverride(e, options); 
+            if (options.handleError()) {
+                options.handleError()(e, options); 
             }
             else {
                 const logPrefix = options.logPrefix(); 
@@ -103,16 +111,6 @@ function Handler(options) {
             console.error(ex);
         }
     }; 
-
-    /**
-     * override this to globally override the default error handling 
-     * 
-     * @param {Error} e 
-     *  the exception caught
-     * @param {Options} options
-     *  encapsulates exception-handling options 
-     */
-    this.handleErrorOverride = null;
 }
 
 module.exports = Handler;

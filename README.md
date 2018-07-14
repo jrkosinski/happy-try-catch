@@ -113,15 +113,29 @@ Examples
 
 ### Override Default Handling Globally
 ```javascript
-    const exception = require('./index').create({ logPrefix: 'TEST'});
-
     //globally override the default handler 
-    exception.handleErrorOverride = (e, options) => {
-        console.log(options.logPrefix() + ' - eep eep'); 
-    }; 
+    const exception = require('./index').create({ 
+        logPrefix: 'TEST',
+        handleError: (e, options) => {
+            console.log(options.logPrefix() + ' - eep eep'); 
+        }
+    });
 
     exception.try(() => {
         return functionThatErrors();
+    });
+```
+
+### Override Default Handling per Call
+```javascript
+    const exception = require('./index').create({ logPrefix: 'TEST'});
+
+    exception.try(() => {
+        return functionThatErrors();
+    }, {
+        handleError: (e, options) => {
+            console.log(options.logPrefix() + ' - eep eep'); 
+        }
     });
 ```
 
@@ -134,7 +148,7 @@ Examples
 
         //usage as normal 
         exception.try(() => {   
-            functionThatErrors();
+            resolve(functionThatErrors());
         }, {
             //on error, be sure to reject promise (else it will hang forever) 
             onError: (e) => {

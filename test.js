@@ -1,6 +1,5 @@
 'use strict'; 
 
-//ensure async case 
 //provide case-by-case complete override
 //write readme
 
@@ -76,7 +75,7 @@ function overrideDefaultHandling() {
     const exception = require('./index').create({ logPrefix: 'TEST'});
 
     //globally override the default handler 
-    exception.handleErrorOverride = (e, options) => {
+    exception.handleError = (e, options) => {
         console.log(options.logPrefix() + ' - eep eep'); 
     }; 
 
@@ -110,7 +109,7 @@ function withPromises() {
 
         //usage as normal 
         exception.try(() => {   
-            functionThatErrors();
+            resolve(functionThatErrors());
         }, {
             //on error, be sure to reject promise (else it will hang forever) 
             onError: (e) => {
