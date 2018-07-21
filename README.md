@@ -1,5 +1,6 @@
 happy-try-catch
 ================
+npm: https://npmjs.com/package/happy-try-catch
 
 Use Case
 --------
